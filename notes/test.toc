@@ -1,6 +1,0 @@
-\contentsline {section}{\numberline {1}Overview}{1}%
-\contentsline {subsection}{\numberline {1.1}Course details}{1}%
-\contentsline {section}{\numberline {2}Introductory Definitions}{1}%
-\contentsline {subsection}{\numberline {2.1}Alphabets and Strings}{1}%
-\contentsline {subsection}{\numberline {2.2}Encoding Mathematical Objects}{2}%
-\contentsline {subsection}{\numberline {2.3}Computational Problems}{2}%
