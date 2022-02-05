@@ -1,0 +1,145 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=0.75in]{geometry}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{Undergrad Complexity: Lecture 1}
+\author{Ben Chaplin}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Overview}
+\subsection{Course details}
+
+{\bf Course Title}: Undergrad Complexity\\
+{\bf Teacher}: Professor Ryan O'Donnell\\
+{\bf School:} Carnegie Melon University\\
+{\bf Lectures}: https://www.youtube.com/playlist?list=PLm3J0oaFux3YL5vLXpzOyJiLtqLp6dCW2\\
+{\bf Textbook}: {\it Introduction to the Theory of Computation} by Michael Sipser
+
+\section{Introductory Definitions}
+\subsection{Alphabets and Strings}
+
+\begin{defn}
+    {\bf Computational tasks} are processes which, given an input, should produce a certain kind of 
+    output.
+\end{defn}
+
+In general, we encode both inputs and outputs using a given set of characters.
+
+\begin{defn}
+    An {\bf alphabet} $\Sigma$ is a non-empty finite set of symbols.
+\end{defn}
+
+\begin{ex}
+    $\Sigma = \{0, 1\}$.
+\end{ex}
+
+\begin{defn}
+    $\Sigma^n$ is the set of all {\bf strings} of length exactly $n$ made up of symbols in the
+    alphabet $\Sigma$.
+\end{defn}
+
+\begin{ex}
+    Let $\Sigma = \{0, 1\}$, then $\Sigma^2 = \{00, 01, 10, 11\}$.
+\end{ex}
+
+Note that $n = 0$ is allowed, the empty string is denoted as $\epsilon$.
+
+\begin{defn}
+    $\Sigma^* = \Sigma^0 \cup \Sigma^1 \cup ...$ is the set of all finite length strings made up of
+    symbols in the alphabet $\Sigma$.
+\end{defn}
+
+\subsection{Encoding Mathematical Objects}
+
+This is an annoying topic, but necessary for a complete analysis of complexity. 
+
+\begin{defn}
+    If $X$ is a mathematical object and $\Sigma$ is an alphabet, then $\langle X \rangle_\Sigma \in
+    \Sigma^*$ is an {\bf encoding of $X$} (a unique representation of $x$ using the alphabet $\sigma$).
+\end{defn}
+
+In general, we are going to avoid rigorously describe encodings. It will be enough to imagine a 
+theoretical "most sensible" one.
+
+\subsection{Computational Problems}
+
+There are three categories of computational problems:
+
+\begin{itemize}
+    \item {\bf Decision problems:} $f: \Sigma^* \to \{0, 1\}$. Problems for which the answer is 
+        either "yes" or "no".
+    
+        \begin{ex}
+            Is a number prime? Does there exist a path in a given graph?
+        \end{ex}
+
+    \item {\bf Function problems:} $f: \Sigma^* \to \Sigma'^*$. Problems for which the answer is 
+        another string (not necessarily of the same alphabet).
+
+        \begin{ex}
+            Convert a decimal number to binary ($\{0, 1, ..., 9\} \to \{0, 1\}$). 
+            Factor a prime.
+        \end{ex}
+
+    \item {\bf Search problems:} $f: \Sigma^* \to \{x : x \in \Sigma'^*\}$. 
+        Problems for which there may be more than one answer, or no answer at all.
+
+        \begin{ex}
+            What are the paths in a given graph?
+        \end{ex}
+\end{itemize}
+
+We primarly work with decision problems. In most cases, search problems and function problems can be
+easily reduced to decision problems, without added complexity.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
