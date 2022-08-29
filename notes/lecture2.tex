@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=0.75in]{geometry}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{Undergrad Complexity: Lecture 2}
+\author{Ben Chaplin}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Background}
+\subsection{Languages}
+
+\begin{defn}
+    A {\bf language L} over an alphabet $\Sigma$ is a subset of strings $L \subseteq \Sigma^*$.
+\end{defn}
+
+\begin{ex}
+PRIMES $= \{\langle x \rangle : x \in \N, x$ is prime$\}$, equivalent to the decision problem $\{0, 1\}^* \rightarrow \{$no, yes$\}$.
+\end{ex}
+
+\subsection{Algorithms}
+
+What is an algorithm? We can define the concept using programming languages, or better, models of computation. Turing machines are 
+a good choice as they're easy to formalize. Furthermore: \medskip
+
+\noindent {\bf Church-Turing Thesis}. Any real-world algorithm can be simulated by Turing Machines.\medskip
+
+However, this is a statement about computability. In terms of complexity theory, it's important to note that an algorithm running in 
+time $T$ in C-like pseudocode, it can compiled to a Turing machine running in time roughly $T^4$. 
+
+\section{Turing Machines}
+\subsection{Model}
+
+Official model of a Turing Machine: 
+\begin{itemize}
+    \item one tape
+    \item two-way infinite
+\end{itemize}
+
+Roughly, the tape holds symbols from an alphabet and reads/writes with a "head" pointer. The source code tells us how to move and write.
+
+\subsection{Formal definition}
+
+\begin{defn}
+    A {\bf Turing machine M} is a 7-tuple $M = (\Gamma, b, \Sigma, Q, q_0, F, \delta)$, where
+    \begin{itemize}
+        \item $\Gamma$ is a finite, non-empty set of tape symbols
+        \item $b \in \Gamma$ is the blank symbol (allowed to occur infinitely on tape)
+        \item $\Sigma \subseteq (\Gamma - \{b\})$ is the input alphabet 
+        \item $Q$ is a finite, non-empty set of states
+        \item $q_0$ is the initial state 
+        \item $F \subseteq Q$ is the set of accepting states 
+        \item $\delta: (Q - F) \times \Gamma \rightarrow Q \times \Gamma \times \{$left, right$\}$ is the transition function. If $\delta$ 
+            is not defined on the current tape symbol, the machine halts.
+    \end{itemize}
+\end{defn}
+
+
+
+
+
+
+
+
+
+\end{document}
+
