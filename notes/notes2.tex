@@ -16,7 +16,7 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
 
-\title{Undergrad Complexity: Lecture 2}
+\title{Undergrad Complexity Theory: Notes 2}
 \author{Ben Chaplin}
 \date{}
 
@@ -68,7 +68,7 @@ Roughly, the tape holds symbols from an alphabet and reads/writes with a "head" 
         \item $Q$ is a finite, non-empty set of states
         \item $q_0$ is the initial state 
         \item $F \subseteq Q$ is the set of accepting states 
-        \item $\delta: (Q - F) \times \Gamma \rightarrow Q \times \Gamma \times \{$left, right$\}$ is the transition function. If $\delta$ 
+        \item $\delta: (Q - F) \times \Gamma \nrightarrow Q \times \Gamma \times \{$left, right$\}$ is the transition function. If $\delta$ 
             is not defined on the current tape symbol, the machine halts.
     \end{itemize}
 \end{defn}
