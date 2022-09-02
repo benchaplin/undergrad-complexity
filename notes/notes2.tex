@@ -1,6 +1,22 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath, amsthm, amssymb}
-\usepackage[margin=0.75in]{geometry}
+\usepackage[margin=0.75in]{geometry} 
+\usepackage{pict2e,amsmath,relsize}
+
+\DeclareRobustCommand{\xvdash}[2][]{\mathrel{\drawxvdash{#1}{#2}}}
+
+\newcommand{\drawxvdash}[2]{%
+  \vcenter{\hbox{%
+    \setlength{\unitlength}{1em}%
+    \begin{picture}(1,1)
+    \roundcap
+    \put(0,0){\line(0,1){1}}
+    \put(0,0.5){\line(1,0){1}}
+    \put(0.5,0){\makebox[0pt]{\text{\smaller$\scriptscriptstyle#2$}}}
+    \put(0.5,0.6){\makebox[0pt]{\text{\smaller$\scriptscriptstyle#1$}}}
+    \end{picture}%
+  }}%
+}
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}
@@ -60,18 +76,52 @@ Roughly, the tape holds symbols from an alphabet and reads/writes with a "head" 
 \subsection{Formal definition}
 
 \begin{defn}
-    A {\bf Turing machine M} is a 7-tuple $M = (\Gamma, b, \Sigma, Q, q_0, F, \delta)$, where
+    A {\bf Turing machine M} is a 5-tuple $M = (\Sigma, Q, q_0, F, \delta)$, where
     \begin{itemize}
-        \item $\Gamma$ is a finite, non-empty set of tape symbols
-        \item $b \in \Gamma$ is the blank symbol (allowed to occur infinitely on tape)
-        \item $\Sigma \subseteq (\Gamma - \{b\})$ is the input alphabet 
-        \item $Q$ is a finite, non-empty set of states
+        \item $\Sigma$ finite set of symbols, the input alphabet (blank symbol is here)
+        \item $Q$ is a finite set of states
         \item $q_0$ is the initial state 
         \item $F \subseteq Q$ is the set of accepting states 
-        \item $\delta: (Q - F) \times \Gamma \nrightarrow Q \times \Gamma \times \{$left, right$\}$ is the transition function. If $\delta$ 
+        \item $\delta: (Q) \times \Sigma \nrightarrow Q \times \Sigma \times \{$left, right$\}$ is the transition function. If $\delta$ 
             is not defined on the current tape symbol, the machine halts.
     \end{itemize}
 \end{defn}
+
+Conventions: $\Sigma = \{0, 1\}$ where 0 is the blank symbol, $\delta(q, a)$ is undefined for all $q \in F$ and $a \in \Sigma$ (this is
+how we define halting).
+
+We still need to define how the machine "runs."
+
+\begin{defn}
+    A {\bf configuration} is a word $ypx$ where $x, y \in \Sigam^*$ and $p \in Q$. This means that the TM head is in state $p$,
+    positioned at $x$ and, the tape inscription is $yx$.
+\end{defn}
+
+Next, we describe the following notation for a one-step relation:
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
