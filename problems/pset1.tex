@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{pict2e,amsmath,relsize}
+
+\DeclareRobustCommand{\xvdash}[2][]{\mathrel{\drawxvdash{#1}{#2}}}
+
+\newcommand{\drawxvdash}[2]{%
+  \vcenter{\hbox{%
+    \setlength{\unitlength}{1em}%
+    \begin{picture}(1,1)
+    \roundcap
+    \put(0,0){\line(0,1){1}}
+    \put(0,0.5){\line(1,0){1}}
+    \put(0.5,0){\makebox[0pt]{\text{\smaller$\scriptscriptstyle#2$}}}
+    \put(0.5,0.6){\makebox[0pt]{\text{\smaller$\scriptscriptstyle#1$}}}
+    \end{picture}%
+  }}%
+}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{Undergrad Complexity: Problem Set 1}
+\author{Ben Chaplin}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+{\bf Problem 1}
+A variadic function $f: \N^* \rightarrow \N$ is called a {\bf coding function} if there are "inverse" functions
+$g: \N \rightarrow \N$ and $h: \N \times \N \rightarrow \N$ such that:
+
+\begin{align*}
+	g(f(a_1, \ldots, a_n))    & = n                    \\
+	h(f(a_1, \ldots, a_n), i) & = a_i, i \leq i \leq n
+\end{align*}
+
+
+\end{document}
+
