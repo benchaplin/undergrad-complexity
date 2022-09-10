@@ -1,5 +1,5 @@
 \documentclass[11pt]{article}
-\usepackage{amsmath, amsthm, amssymb}
+\usepackage{amsmath, amsthm, amssymb, mathtools}
 \usepackage[margin=0.75in]{geometry}
 \usepackage{pict2e,amsmath,relsize}
 
@@ -23,8 +23,10 @@
 \newtheorem{cor}{Corollary}
 \newtheorem{lem}{Lemma}
 \theoremstyle{definition}
+\newtheorem{prob}{Problem}
 \newtheorem*{defn}{Definition}
 \newtheorem*{ex}{Example}
+\newtheorem*{ans}{Answer}
 
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
@@ -40,14 +42,74 @@
 
 \maketitle
 
-{\bf Problem 1}
-A variadic function $f: \N^* \rightarrow \N$ is called a {\bf coding function} if there are "inverse" functions
-$g: \N \rightarrow \N$ and $h: \N \times \N \rightarrow \N$ such that:
+\begin{prob}
+	A variadic function $f: \N^* \rightarrow \N$ is called a {\bf coding function} if there are ``inverse" functions
+	$g: \N \rightarrow \N$ and $h: \N \times \N \rightarrow \N$ such that:
 
-\begin{align*}
-	g(f(a_1, \ldots, a_n))    & = n                    \\
-	h(f(a_1, \ldots, a_n), i) & = a_i, i \leq i \leq n
-\end{align*}
+	\begin{align*}
+		g(f(a_1, \ldots, a_n))    & = n                    \\
+		h(f(a_1, \ldots, a_n), i) & = a_i, i \leq i \leq n
+	\end{align*}
+	for all sequences $a_1, \ldots, a_n$. Thus $g$ determines the length of a sequence and $h$ decodes it back to its elements.
+	Moreover, $h$ and $g$ are supposed to be easily computable but let's ignore that for the time being. Now consider the pairing
+	function $\pi$ defined by:
+
+	$$\pi(x, y) = \binom{x + y + 1}{2} + x + 1$$
+
+	and define $f$ as follows:
+
+	\begin{align*}
+		f(nil)              & = 0                             \\
+		f(a)                & = \pi(0, a)                     \\
+		f(a_1, \ldots, a_n) & = \pi(f(a_2, \ldots, a_n), a_1)
+	\end{align*}
+
+	\begin{enumerate}
+		\item Show that $\pi$ is injective.
+		\item Show that $f$ is a coding function (make sure to explain what the appropriate decoding functions $g$ and $h$ are).
+		\item What whould happen if we replaced $pi(x, y)$ by $pi(x, y) -1$? How could you fix the issue?
+	\end{enumerate}
+\end{prob}
+
+\noindent\rule{\textwidth}{0.5pt}
+
+\begin{ans}[1.1]
+	First, note that:
+	\begin{align}
+		\binom{x + y + 1}{2} & = \frac{(x + y)(x +  y + 1)}{2} \\
+		                     & = 1 + 2 + \ldots + (x + y)
+	\end{align}
+	Take $(x_1, y_1), (x_2, y_2) \in \N \times \N$ such that $\pi(x_1, y_1) = \pi(x_2, y_2)$.
+	Assume to the contrary that $x_1 + y_1 \neq x_2 + y_2$, and without loss of generality, suppose that $x_1 + y_1 < x_2 + y_2$.
+	\begin{align*}
+		\binom{x_1 + y_1 + 1}{2} + x_1 + 1     & = \binom{x_2 + y_2 + 1}{2} + x_2 + 1                                    \\
+		\shortintertext{By (1) and (2):}
+		1 + 2 + \ldots + (x_1 + y_1) + x_1 + 1 & = 1 + 2 + \ldots + (x_2 + y_2)  + x_2 + 1                       \tag{3} \\
+		x_1 - x_2                              & = (1 + 2 + \ldots (x_2 + y_2)) - (1 + 2 + \ldots + (x_1 + y_1))         \\
+		                                       & \geq x_2 + y_2                                                          \\
+		x_1                                    & \geq 2x_2 + y_2                                                         \\
+		x_1 + y_1                              & \geq 2x_2 + y_2 + y_1                                                   \\
+		                                       & \geq x_2 + y_2,
+	\end{align*}
+	a contradiction. Thus $x_1 + y_1 = x_2 + y_2$. Then, by (3), $x_1 = x_2$. So $y_1 = y_2$ and $\pi$ is injective.
+\end{ans}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}
