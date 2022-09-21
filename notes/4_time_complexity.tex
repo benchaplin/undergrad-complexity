@@ -1,0 +1,110 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{pict2e,amsmath,relsize}
+
+\DeclareRobustCommand{\xvdash}[2][]{\mathrel{\drawxvdash{#1}{#2}}}
+
+\newcommand{\drawxvdash}[2]{%
+  \vcenter{\hbox{%
+    \setlength{\unitlength}{1em}%
+    \begin{picture}(1,1)
+    \roundcap
+    \put(0,0){\line(0,1){1}}
+    \put(0,0.5){\line(1,0){1}}
+    \put(0.5,0){\makebox[0pt]{\text{\smaller$\scriptscriptstyle#2$}}}
+    \put(0.5,0.6){\makebox[0pt]{\text{\smaller$\scriptscriptstyle#1$}}}
+    \end{picture}%
+  }}%
+}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem{lem}{Lemma}
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem*{ex}{Example}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title{Undergrad Complexity Theory: Notes 4}
+\author{Ben Chaplin}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Complexity}
+\subsection{Complexity classes}
+
+\begin{defn}
+    Let $t: \N \rightarrow \R^+$. The {\bf complexity class TIME} is defined:
+\end{defn}
+$$\text{TIME}(t(n)) = \{L : L \text{ is a language decided by some TM in } O(t(n)) \text{ time}\}.$$
+
+\begin{ex}
+    PALINDROMES $ \in $ TIME$(n^2)$. Because there is a Turing Machine which decides PALINDROMES in $O(n^2)$ time.
+\end{ex}
+
+An interesting fact: if there exists a TM deciding some language $L$ in $5n^3$ time, then there also exists a TM
+deciding $L$ in $n^3$ time, and $\frac{1}{1000} n^3$ time... etc. Basically, we can make constants arbitrarily small with
+Turing Machines by adding states and tape symbols. However the big-$O$ classes remain the same.
+
+\begin{defn}
+    The {\bf complexity class P} is defined P$ = \bigcup_{k \in \N} $TIME$(n^k)$. In other words, P is the class of 
+    languages decidable in polynomial time.
+\end{defn}
+
+Note that the previous definition is model-agnostic. Even multitape Turing Machines are just a polynomial factor faster
+than single-tape Turing Machines. So P is the same no matter which model we choose.
+
+\subsection{Halting problem}
+
+\begin{defn}
+    ACCEPTS $= \{\langle M, w \rangle : M \text{ is a TM with input alphabet } \Sigma, w \in \Sigma^*, M(w) \text{accepts}\}$.
+\end{defn}
+
+\begin{thm}
+    There exists a {\bf Universal TM} $\mathcal{U}$ that takes as an input $\langle M, w \rangle$ and simulates $M(w)$.
+\end{thm}
+
+\begin{thm}[Turing's Theorem]
+    There exists no TM $H$ that decides ACCEPTS.
+\end{thm}
+\begin{proof}
+    Assume to the contrary that $H$ exists. We define another TM $D$ that takes an input encoding of a Turing machine. 
+    D prepares the input $\langle M, \langle M \rangle \rangle$ and runs $H$ on it. Then, if $H$ accepts, $D$ rejects, and 
+    if $H$ rejects, $D$ accepts.
+
+    Note that $D$ is a decider, because $H$ is a decider. But now, take $D(\langle D \rangle)$. The computation will run:
+    $$H(\langle D, \langle D \rangle \rangle)$$
+
+    Say $D$ accepts $\langle D \rangle$. That means $H$ rejects $\langle D, \langle D \rangle \rangle$, which means that 
+    $D$ rejects $\langle D \rangle$. We have a contradiction.
+\end{proof}
+
+This argument is known as a diagonalization argument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
