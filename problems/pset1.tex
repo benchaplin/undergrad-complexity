@@ -48,7 +48,7 @@
 
 	\begin{align*}
 		g(f(a_1, \ldots, a_n))    & = n                    \\
-		h(f(a_1, \ldots, a_n), i) & = a_i, i \leq i \leq n
+        h(f(a_1, \ldots, a_n), i) & = a_i && 1 \leq i \leq n
 	\end{align*}
 	for all sequences $a_1, \ldots, a_n$. Thus $g$ determines the length of a sequence and $h$ decodes it back to its elements.
 	Moreover, $h$ and $g$ are supposed to be easily computable but let's ignore that for the time being. Now consider the pairing
@@ -67,7 +67,7 @@
 	\begin{enumerate}
 		\item Show that $\pi$ is injective.
 		\item Show that $f$ is a coding function (make sure to explain what the appropriate decoding functions $g$ and $h$ are).
-		\item What whould happen if we replaced $pi(x, y)$ by $pi(x, y) -1$? How could you fix the issue?
+		\item What whould happen if we replaced $\pi(x, y)$ by $\pi(x, y) -1$? How could you fix the issue?
 	\end{enumerate}
 \end{prob}
 
@@ -94,6 +94,74 @@
 	a contradiction. Thus $x_1 + y_1 = x_2 + y_2$. Then, by (3), $x_1 = x_2$. So $y_1 = y_2$ and $\pi$ is injective.
 \end{ans}
 
+\begin{ans}[1.2]
+    \begin{lem}
+        $f$ is injective over inputs of the same size.
+    \end{lem}
+    \begin{proof}
+        We proceed by induction over the size of the input. If $n = 1$, then $f(x) = \pi(0, x)$, so $f$ is injective by 
+        the fact that $\pi$ is injective. Suppose $f$ is injective for inputs of size $n - 1$ and consider inputs of size $n$:
+        $(a_1, \ldots, a_n), (b_1, \ldots, b_n) \in \N^n$ where $f(a_1, \ldots, a_n) = f(b_1, \ldots, b_n)$.
+
+        \begin{align*}
+            f(a_1, \ldots, a_n) &= f(b_1, \ldots, b_n)\\
+            \pi(f(a_2, \ldots, a_n), a_1) &= \pi(f(b_2, \ldots, b_n), b_1)
+        \end{align*}
+
+        So by the fact that $\pi$ is injective, $a_1 = b_1$ and $f(a_2, \ldots, a_n) = f(b_2, \ldots, b_n)$. 
+        Thus, $a_i = b_i$ for $1 \leq i \leq n$.
+    \end{proof}
+
+    \begin{lem}
+        $f(\N^n)$ and $f(\N^m)$ are disjoint for any $n \neq m \in \N$.
+    \end{lem}
+    \begin{proof}
+        Suppose $m < n$ and $f(a_1, \ldots, a_m) = f(b_1, \ldots, b_n)$. Then:
+
+        $$\pi(f(a_2, \ldots, a_m), a_1) = \pi(f(b_2, \ldots, b_n), b_1)$$
+
+        Then $a_1 = b_1$. Furthermore, because $\pi$ is injective:
+
+        $$\pi(f(a_3, \ldots, a_m), a_2) = \pi(f(b_3, \ldots, b_n), b_2)$$
+
+        So $a_2 = b_2$. By the same logic, $a_i = b_i$ for $1 \leq i \leq m$. But then we have:
+
+        \begin{align*}
+            \pi(f(nil), a_m) &= \pi(f(b_{m + 1}, \ldots, b_n), b_m)\\
+            f(nil) &= f(b_{m + 1}, \ldots, b_n)\\
+            0 &= f(b_{m + 1}, \ldots, b_n)
+        \end{align*}
+
+        But this cannot be the case because $f(x) > 0$ for all $x \in \N^* - \{nil\}$.
+    \end{proof}
+
+    {\bf Lemma 1} and {\bf Lemma 2} show that $f$ is injective over $\N^*$. Thus, $f$ has a partial inverse. We can now define
+    $g$ and $h$ over all $x \in f(\N^*)$.
+
+    \begin{align*}
+        g(x) &= |(f^{-1}(x)|\\
+        h(x, i) &= P^{|f^{-1}(x)|}_i(f^{-1}(x)) && \text{where } P \text{ is the projection function}
+    \end{align*}
+\end{ans}
+
+\begin{ans}[1.3]
+    Defining $\pi$ as:
+
+	$$\pi(x, y) = \binom{x + y + 1}{2} + x$$
+
+    does not change the fact that $\pi$ is injective. However, it throws a wrench in our proof of {\bf Lemma 2} from 
+    {\bf Answer 1.2}. We can no longer assume that $f(x) > 0$ for all $x \in \N^* - \{nil\}$, as now:
+
+    $$f(0) = f(0, 0) = \ldots = 0$$
+
+    Actually, now {\bf Lemma 2} is false. A counterexample: $f(x) = f(x, 0)$. But trailing 0's are the only case---we can 
+    see this via the proof of {\bf Lemma 2}. We can define $f^{-1}$ more carefully: 
+
+    $$f^{-1}(a_1, \ldots, a_n) = f^{-1}(a_1, \ldots, a_i)$$
+
+    where $a_i \neq 0$ for the largest $i \leq n$. $h$ can be saved with a modified projection function that returns 0 for
+    indices greater than what exist. But $g$ is a goner.
+\end{ans}
 
 
 
